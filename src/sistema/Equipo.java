@@ -12,10 +12,6 @@ public class Equipo {
 
 	    
 	    public Equipo() {
-	    	this.lideresProyecto=1;
-	    	this.arquitectos=2;
-	    	this.programadores=4;
-	    	this.testers=5;
 	    	
 	    }
 	    public void cargarPersonas(List<Persona> personas) {
