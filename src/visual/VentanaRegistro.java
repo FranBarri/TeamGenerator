@@ -13,8 +13,14 @@ import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import controladores.VentanaEstadisticasControlador;
+import controladores.VentanaRegistroControlador;
+import sistema.Persona;
+
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -46,7 +52,7 @@ public class VentanaRegistro extends JFrame{
 		} catch (Exception e) {
 			System.out.println("Error cargando imagen: " + e.getMessage());
 		}
-		setTitle("ConectAR");
+		setTitle("");
 		setLocationRelativeTo(null);
 		setResizable(false);
 		
@@ -122,6 +128,13 @@ public class VentanaRegistro extends JFrame{
         btnRegistrar.setBounds(115, 337, 90, 24);
         panelRegistro.add(btnRegistrar);
         
+        JButton btnGenerar = new JButton("Generar");
+        btnGenerar.setForeground(Color.BLACK);
+        btnGenerar.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        btnGenerar.setBackground(Color.LIGHT_GRAY);
+        btnGenerar.setBounds(24, 337, 81, 24);
+        panelRegistro.add(btnGenerar);
+        
         GroupLayout gl_panelGradiente1 = new GroupLayout(panelGradiente1);
         gl_panelGradiente1.setHorizontalGroup(
         	gl_panelGradiente1.createParallelGroup(Alignment.LEADING)
@@ -139,8 +152,19 @@ public class VentanaRegistro extends JFrame{
         panelGradiente1.setLayout(gl_panelGradiente1);
 
         btnRegistrar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-//		btnRegistrar.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//		});
+		btnRegistrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Persona per = VentanaRegistroControlador.generarPersona(getTitle(), getWarningString(), getName(), ABORT);
+				VentanaRegistroControlador.guardarJson(per);
+			}
+		});
+        
+        btnGenerar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnGenerar.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			VentanaRegistroControlador.cerrar();
+			VentanaEstadisticasControlador.mostrar();
+		}
+	});
 	}
 }
