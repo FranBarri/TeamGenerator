@@ -25,7 +25,7 @@ public class VentanaEstadisticas extends JFrame{
 	private File imagen;
 	private Image icono;
 	private PanelGradiente panelGradiente1;
-	private PanelBorder panelRegistro;
+	private PanelBorder panelRedondo;
 	
 	public VentanaEstadisticas() {
 		initialize();
@@ -46,30 +46,30 @@ public class VentanaEstadisticas extends JFrame{
 		setResizable(false);
 		
 		panelGradiente1 = new swing.PanelGradiente();
-		panelRegistro = new swing.PanelBorder();
+		panelRedondo = new swing.PanelBorder();
 	
 		panelGradiente1.setColorPrimario(new Color(0, 230, 249));
         panelGradiente1.setColorSecundario(new Color(128, 0, 64));
         
-        panelRegistro.setBackground(new java.awt.Color(255, 255, 255));
+        panelRedondo.setBackground(new java.awt.Color(255, 255, 255));
         
         getContentPane().add(panelGradiente1, BorderLayout.CENTER);
 
-        panelGradiente1.setLayer(panelRegistro, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        panelGradiente1.setLayer(panelRedondo, javax.swing.JLayeredPane.DEFAULT_LAYER);
         
         GroupLayout gl_panelGradiente1 = new GroupLayout(panelGradiente1);
         gl_panelGradiente1.setHorizontalGroup(
         	gl_panelGradiente1.createParallelGroup(Alignment.LEADING)
         		.addGroup(gl_panelGradiente1.createSequentialGroup()
         			.addGap(59)
-        			.addComponent(panelRegistro, GroupLayout.PREFERRED_SIZE, 485, GroupLayout.PREFERRED_SIZE)
+        			.addComponent(panelRedondo, GroupLayout.PREFERRED_SIZE, 485, GroupLayout.PREFERRED_SIZE)
         			.addContainerGap(340, Short.MAX_VALUE))
         );
         gl_panelGradiente1.setVerticalGroup(
         	gl_panelGradiente1.createParallelGroup(Alignment.LEADING)
         		.addGroup(gl_panelGradiente1.createSequentialGroup()
         			.addGap(38)
-        			.addComponent(panelRegistro, GroupLayout.PREFERRED_SIZE, 324, GroupLayout.PREFERRED_SIZE)
+        			.addComponent(panelRedondo, GroupLayout.PREFERRED_SIZE, 324, GroupLayout.PREFERRED_SIZE)
         			.addContainerGap(199, Short.MAX_VALUE))
         );
         
@@ -96,7 +96,7 @@ public class VentanaEstadisticas extends JFrame{
         ChartPanel chartPanel = new ChartPanel(chart);
         // Agregar el panel de gráfico a tu interfaz de usuario
         // Por ejemplo, si estás utilizando un JFrame:
-        panelRegistro.add(chartPanel);
+        panelRedondo.add(chartPanel);
 	}
 	
 

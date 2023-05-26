@@ -57,11 +57,11 @@ public class Registrar {
 	
 	public static void guardarJson(List<Persona> personas) {
 	    ListaPersonas listaPersonas = new ListaPersonas();
-//	    for (Persona person : personas) {
+	    for (Persona person : personas) {
 //	        if (!yaIngresada(person, listaPersonas.getLista())) {
-//	            listaPersonas.agregarLocalidad(person.getApellido(), person.getNombre(), person.getRol(), person.getCalificacion());                
+	            listaPersonas.agregarPersona(person.getApellido(), person.getNombre(), person.getRol(), person.getCalificacion());                
 //	        }
-//	    }
+	    }
 	    Gson gson = new Gson();
 	    String json = gson.toJson(listaPersonas);
 	    try (Writer writer = new FileWriter("listaPersonas.json")) {

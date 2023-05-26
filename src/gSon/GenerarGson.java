@@ -1,4 +1,5 @@
 package gSon;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -9,7 +10,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 public class GenerarGson {
-    private static final String FILE_NAME = "listaLocalidades.json";
+    private static final String FILE_NAME = "listaPersonas.json";
     
     private Gson gson;
 

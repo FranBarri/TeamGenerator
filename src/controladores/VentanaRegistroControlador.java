@@ -1,6 +1,5 @@
 package controladores;
 
-import java.awt.EventQueue;
 import java.util.List;
 
 import sistema.Persona;
@@ -9,24 +8,8 @@ import visual.VentanaRegistro;
 
 public class VentanaRegistroControlador {
 	
-	public static VentanaRegistro ventanaRegistro;
+	static VentanaRegistro ventanaRegistro = new VentanaRegistro();
 	
-	public VentanaRegistroControlador() {
-		inicializarVentanaRegistro();
-	}
-	
-	private static void inicializarVentanaRegistro() {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ventanaRegistro = new VentanaRegistro();
-					mostrar();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 	public static void cerrar() {
 		ventanaRegistro.setVisible(false);
 	}
@@ -40,5 +23,9 @@ public class VentanaRegistroControlador {
 	
 	public static void guardarJson(List<Persona> Personas) {
 		Registrar.guardarJson(Personas);
+	}
+	
+	public static List<Persona> getLista() {
+		return Registrar.getLista();
 	}
 }

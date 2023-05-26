@@ -4,12 +4,12 @@ import javax.swing.UIManager;
 
 public class Principal {
 	
-	public static VentanaRegistroControlador instanciaRegistroControlador;
+	public static VentanaPrincipalControlador instanciaPrincipalControlador;
 	
 	public static void main(String args[]) {
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-			instanciaRegistroControlador = new VentanaRegistroControlador();
+			instanciaPrincipalControlador = new VentanaPrincipalControlador();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
