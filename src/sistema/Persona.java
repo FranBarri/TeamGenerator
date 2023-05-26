@@ -1,28 +1,28 @@
 package sistema;
 
 public class Persona {
+	private String apellido;
 	private String nombre;
-	private int calificacion;
 	private String rol;
+	private int calificacion;
 	
-	public Persona(){
-		
+	public Persona(String apellido, String nombre, String rol, int calficacion){
+		this.apellido = apellido;
+		this.nombre = nombre;
+		this.rol = rol;
+		this.calificacion = calficacion;
 	}
-
+	
+	public String getApellido() {
+		return apellido;
+	}
+	
 	public String getNombre() {
 		return nombre;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-
 	public int getCalificacion() {
 		return calificacion;
-	}
-
-	public void setCalificacion(int calificacion) {
-		this.calificacion = calificacion;
 	}
 
 	public String getRol() {
