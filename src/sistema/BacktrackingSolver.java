@@ -1,49 +1,48 @@
 package sistema;
 
+import java.util.Map;
+import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BacktrackingSolver extends Thread {
+public class BacktrackingSolver {
     private Equipo equipo;
-    private List<Persona> solucionActual;
     private List<Persona> mejorSolucion;
     private int mejorCalificacion;
 
     public BacktrackingSolver(Equipo equipo) {
         this.equipo = equipo;
-        this.solucionActual = new ArrayList<>();
         this.mejorSolucion = new ArrayList<>();
         this.mejorCalificacion = 0;
     }
 
-    @Override
-    public void run() {
-        backtracking(0);
+    public List<Persona> resolver() {
+        List<Persona> solucionActual = new ArrayList<>();
+        backtracking(solucionActual, 0);
+        return mejorSolucion;
     }
-
-    private void backtracking(int posicion) {
-        if (posicion == equipo.getPersonas().size()) {
-            if (esSolucionValida(solucionActual)) {
-                int calificacionActual = calcularCalificacion(solucionActual);
-                if (calificacionActual > mejorCalificacion) {
-                    mejorCalificacion = calificacionActual;
-                    mejorSolucion = new ArrayList<>(solucionActual);
-                }
+    
+    private void backtracking(List<Persona> solucionActual, int indice) {
+        if (indice == equipo.getPersonas().size()) {
+            int calificacionActual = calcularCalificacion(solucionActual);
+            if (calificacionActual > mejorCalificacion) {
+                mejorCalificacion = calificacionActual;
+                mejorSolucion = new ArrayList<>(solucionActual);
             }
-        } else {
-            Persona persona = equipo.getPersonas().get(posicion);
-            solucionActual.add(persona);
-            backtracking(posicion + 1);
-            solucionActual.remove(solucionActual.size() - 1);
-            backtracking(posicion + 1);
+            return;
         }
-    }
 
-    private boolean esSolucionValida(List<Persona> solucion) {
-        // Verificar si la solución cumple con los requerimientos de cantidad de roles
-        // y si no hay incompatibilidades entre las personas seleccionadas
-    	return false;
+        Persona persona = equipo.getPersonas().get(indice);
+
+        if (esValidoAgregarPersona(solucionActual, persona)) {
+            solucionActual.add(persona);
+            backtracking(solucionActual, indice + 1);
+            solucionActual.remove(solucionActual.size() - 1);
+        }
+
+        backtracking(solucionActual, indice + 1);
     }
+    
 
     private int calcularCalificacion(List<Persona> solucion) {
         int calificacion = 0;
@@ -53,7 +52,30 @@ public class BacktrackingSolver extends Thread {
         return calificacion;
     }
 
-    public List<Persona> getMejorSolucion() {
-        return mejorSolucion;
+    private boolean esValidoAgregarPersona(List<Persona> solucion, Persona persona) {
+        Map<String, Integer> rolesActuales = new HashMap<>();
+        rolesActuales.put("líder de proyecto", 0);
+        rolesActuales.put("arquitecto", 0);
+        rolesActuales.put("programador", 0);
+        rolesActuales.put("tester", 0);
+
+        for (Persona p : solucion) {
+            rolesActuales.put(p.getRol(), rolesActuales.get(p.getRol()) + 1);
+        }
+
+        if (rolesActuales.get(persona.getRol()) >= equipo.getRolMax(persona.getRol())) {
+            return false;
+        }
+
+        for (Incompatibilidad incompatibilidad : equipo.getIncompatibilidades()) {
+            if (solucion.contains(incompatibilidad.getPersona1()) && persona.equals(incompatibilidad.getPersona2()) ||
+                solucion.contains(incompatibilidad.getPersona2()) && persona.equals(incompatibilidad.getPersona1())) {
+                return false;
+            }
+        }
+
+        return true;
     }
+
+
 }

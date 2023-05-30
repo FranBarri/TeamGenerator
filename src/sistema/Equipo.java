@@ -18,23 +18,10 @@ public class Equipo {
 	        this.personas = personas;
 	    }
 
-	    public void visualizarPersonas() {
-	        System.out.println("Personas disponibles:");
-	        for (Persona persona : personas) {
-	            System.out.println("Nombre: " + persona.getNombre() + ", Rol: " + persona.getRol() + ", Calificación: " + persona.getCalificacion());
-	        }
-	    }
-
 	    public void cargarIncompatibilidades(List<Incompatibilidad> incompatibilidades) {
 	        this.incompatibilidades = incompatibilidades;
 	    }
 
-	    public void visualizarIncompatibilidades() {
-	        System.out.println("Incompatibilidades:");
-	        for (Incompatibilidad incompatibilidad : incompatibilidades) {
-	            System.out.println("Persona 1: " + incompatibilidad.getPersona1().getNombre() + ", Persona 2: " + incompatibilidad.getPersona2().getNombre());
-	        }
-	    }
 
 	    public void cargarRequerimientos(int lideresProyecto, int arquitectos, int programadores, int testers) {
 	        this.lideresProyecto = lideresProyecto;
@@ -43,12 +30,20 @@ public class Equipo {
 	        this.testers = testers;
 	    }
 
-	    public void visualizarRequerimientos() {
-	        System.out.println("Requerimientos del equipo:");
-	        System.out.println("Líderes de proyecto: " + lideresProyecto);
-	        System.out.println("Arquitectos: " + arquitectos);
-	        System.out.println("Programadores: " + programadores);
-	        System.out.println("Testers: " + testers);
+	    public int getRolMax(String rol) {
+			//Devuelve el número máximo de personas permitidas para un rol específico.
+	        switch (rol) {
+	            case "líder de proyecto":
+	                return getLideresProyecto();
+	            case "arquitecto":
+	                return getArquitectos();
+	            case "programador":
+	                return getProgramadores();
+	            case "tester":
+	                return getTesters();
+	            default:
+	                throw new IllegalArgumentException("Rol desconocido: " + rol);
+	        }
 	    }
 		public int getLideresProyecto() {
 			return lideresProyecto;
@@ -86,4 +81,6 @@ public class Equipo {
 		public void setIncompatibilidades(List<Incompatibilidad> incompatibilidades) {
 			this.incompatibilidades = incompatibilidades;
 		}
+		
+		
 }

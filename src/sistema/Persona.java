@@ -6,11 +6,11 @@ public class Persona {
 	private String rol;
 	private int calificacion;
 	
-	public Persona(String apellido, String nombre, String rol, int calficacion){
+	public Persona(String apellido, String nombre, String rol, int calificacion){
 		this.apellido = apellido;
 		this.nombre = nombre;
 		this.rol = rol;
-		this.calificacion = calficacion;
+		this.calificacion = calificacion;
 	}
 	
 	public String getApellido() {
