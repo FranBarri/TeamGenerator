@@ -14,8 +14,8 @@ public class ListaPersonas implements Serializable {
         lista = new LinkedList<Persona>();
     }
 
-    public void agregarPersona(String apellido, String nombre, String rol, int calificacion) {
-        Persona localidad = new Persona(apellido, nombre, rol, calificacion);
+    public void agregarPersona(String apellido, String nombre, String rol, String incompatibilidad, int calificacion) {
+        Persona localidad = new Persona(apellido, nombre, rol, incompatibilidad, calificacion);
         lista.add(localidad);
     }
 

@@ -18,8 +18,8 @@ public class Registrar {
     private static ListaPersonas listaPersonas = gsonGenerator.getListaDesdeJson();
     private static List<Persona> listaPers = listaPersonas.getLista();
     
-	public static Persona generarPersona(String apellido, String nombre, String rol, int calificacion) {
-		Persona persona = new Persona(apellido, nombre, rol, calificacion);
+	public static Persona generarPersona(String apellido, String nombre, String rol, String incompatibilidad, int calificacion) {
+		Persona persona = new Persona(apellido, nombre, rol, incompatibilidad, calificacion);
 		return persona;
 	}
 	
@@ -40,7 +40,7 @@ public class Registrar {
 	    }
 	    listaPers = ret;
 	    if (!encontrada && !listaPers.isEmpty()) {
-	        JOptionPane.showMessageDialog(null, "La localidad no se encontró en la lista");
+	        JOptionPane.showMessageDialog(null, "La persona no se encontró en la lista");
 	        return listaPers;
 	    }
 	    return ret;
@@ -59,7 +59,8 @@ public class Registrar {
 	    ListaPersonas listaPersonas = new ListaPersonas();
 	    for (Persona person : personas) {
 //	        if (!yaIngresada(person, listaPersonas.getLista())) {
-	            listaPersonas.agregarPersona(person.getApellido(), person.getNombre(), person.getRol(), person.getCalificacion());                
+	            listaPersonas.agregarPersona(person.getApellido(), person.getNombre(), person.getRol(),
+	            		person.getIncompatibilidad(), person.getCalificacion());                
 //	        }
 	    }
 	    Gson gson = new Gson();

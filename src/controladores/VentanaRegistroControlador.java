@@ -17,14 +17,14 @@ public class VentanaRegistroControlador {
 		ventanaRegistro.setVisible(true);
 	}
 	
-	public static Persona generarPersona(String apellido, String nombre, String rol, int calificacion) {
-		return Registrar.generarPersona(apellido, nombre, rol, calificacion);
+	public static Persona generarPersona(String apellido, String nombre, String rol, String incompatibilidad, int calificacion) {
+		return Registrar.generarPersona(apellido, nombre, rol, incompatibilidad, calificacion);
 	}
 	
-	public static void guardarJson(List<Persona> Personas) {
-		Registrar.guardarJson(Personas);
+	public static List<Persona> registrarPersona(Persona persona){
+		return Registrar.registrarPersona(persona);
 	}
-	
+
 	public static List<Persona> getLista() {
 		return Registrar.getLista();
 	}
