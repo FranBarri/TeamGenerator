@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 import java.util.List;
 
 import sistema.Persona;
+import sistema.Registrar;
 import visual.VentanaPrincipal;
 
 public class VentanaPrincipalControlador {
@@ -35,5 +36,10 @@ public class VentanaPrincipalControlador {
 	
 	public static void actualizarTabla(List<Persona> personas) {
 		VentanaPrincipal.actualizarTabla(personas);
+	}	
+	
+	public static void guardarJson(List<Persona> Personas) {
+		Registrar.guardarJson(Personas);
 	}
+	
 }
