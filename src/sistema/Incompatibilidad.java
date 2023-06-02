@@ -4,8 +4,9 @@ public class Incompatibilidad {
 	  	private Persona persona1;
 	    private Persona persona2;
 	    
-	    public Incompatibilidad(){
-	    	
+	    public Incompatibilidad(Persona persona1, Persona persona2) {
+	        this.persona1 = persona1;
+	        this.persona2 = persona2;
 	    }
 
 		public Persona getPersona1() {
