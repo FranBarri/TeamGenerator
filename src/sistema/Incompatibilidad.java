@@ -24,4 +24,8 @@ public class Incompatibilidad {
 		public void setPersona2(Persona persona2) {
 			this.persona2 = persona2;
 		}
+
+		public boolean involucra(Persona persona) {
+			return persona.equals(persona1) || persona.equals(persona2);
+		}
 }

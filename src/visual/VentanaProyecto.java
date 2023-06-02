@@ -13,9 +13,12 @@ import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import controladores.VentanaEstadisticasControlador;
 import controladores.VentanaPrincipalControlador;
 import controladores.VentanaProyectoControlador;
 import controladores.VentanaRegistroControlador;
+import sistema.Equipo;
+import sistema.Incompatibilidad;
 import sistema.Persona;
 
 import java.awt.Font;
@@ -29,10 +32,6 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.Cursor;
-import javax.swing.JComboBox;
-import javax.swing.JSpinner;
-import javax.swing.SpinnerNumberModel;
-import javax.swing.DefaultComboBoxModel;
 
 @SuppressWarnings("serial")
 public class VentanaProyecto extends JFrame{
@@ -43,22 +42,23 @@ public class VentanaProyecto extends JFrame{
 	private JTextField fieldLideres;
 	private JTextField fieldArquitectos;
 	private JTextField fieldTesters;
-	private JLabel lblExito;
-	private String apellido;
-	private String nombre;
-	private String rol;
-	private String incompatibilidad;
-	private int calificacion;
-	private List<Persona> personas;
 	private JTextField fieldProgramadores;
+	private Integer cantLideres;
+	private Integer cantArquitectos;
+	private Integer cantTesters;
+	private Integer cantProgramadores;
+	private static List<Persona> personas;
+	private List<Incompatibilidad> incompatibilidades;
 
 	public VentanaProyecto() {
 		initialize();
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void initialize() {
 		personas = VentanaRegistroControlador.getLista();
+		for (Persona p : personas) {			
+			incompatibilidades = VentanaRegistroControlador.getIncompatibilidades(p, p.getIncompatibilidad());
+		}
 		setBounds(100, 100, 900, 600);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		try {
@@ -146,6 +146,11 @@ public class VentanaProyecto extends JFrame{
         lblTesters.setFont(new Font("Tahoma", Font.PLAIN, 14));
         lblTesters.setBounds(25, 263, 144, 14);
         panelRegistro.add(lblTesters);
+
+        fieldProgramadores = new JTextField();
+        fieldProgramadores.setColumns(10);
+        fieldProgramadores.setBounds(24, 228, 181, 24);
+        panelRegistro.add(fieldProgramadores);
         
         GroupLayout gl_panelGradiente1 = new GroupLayout(panelGradiente1);
         gl_panelGradiente1.setHorizontalGroup(
@@ -166,27 +171,21 @@ public class VentanaProyecto extends JFrame{
         panelGradiente1.setLayout(gl_panelGradiente1);
 
         btnGenerar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-//		btnGenerar.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//        		panelRegistro.remove(lblExito);
-//				apellido = fieldLideres.getText();
-//				nombre = fieldArquitectos.getText();
-//				rol = (String) comboBox.getSelectedItem();
-//				incompatibilidad = fieldTesters.getText();
-//				calificacion = (int) spinner.getValue();
-//				Persona per = VentanaRegistroControlador.generarPersona(apellido, nombre, rol, incompatibilidad, calificacion);
-//				personas = VentanaRegistroControlador.registrarPersona(per);
-//				limpiarFields();
-//				aniadirExito();
-//			}
-//		});
+		btnGenerar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cantLideres = Integer.parseInt(fieldLideres.getText());
+				cantArquitectos = Integer.parseInt(fieldArquitectos.getText());
+				cantTesters = Integer.parseInt(fieldTesters.getText());
+				cantProgramadores = Integer.parseInt(fieldProgramadores.getText());
+				Equipo equipoBase = VentanaProyectoControlador.generarEquipo(personas, incompatibilidades);
+				VentanaProyectoControlador.cargarRequerimientos(equipoBase, cantLideres, cantArquitectos, cantTesters, cantProgramadores);
+				personas = VentanaProyectoControlador.getMejorSolucion(equipoBase);
+				VentanaProyectoControlador.cerrar();
+				VentanaEstadisticasControlador.mostrar();
+			}
+		});
         
         btnVolver.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        
-        fieldProgramadores = new JTextField();
-        fieldProgramadores.setColumns(10);
-        fieldProgramadores.setBounds(24, 228, 181, 24);
-        panelRegistro.add(fieldProgramadores);
 		btnVolver.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			VentanaProyectoControlador.cerrar();
@@ -196,16 +195,7 @@ public class VentanaProyecto extends JFrame{
 	});
 	}
 	
-	private void aniadirExito() {
-        lblExito = new JLabel("\u00A1Persona registrada con éxito!");
-        lblExito.setForeground(new Color(0, 128, 0));
-        lblExito.setFont(new Font("Tahoma", Font.PLAIN, 11));
-        lblExito.setBounds(25, 360, 195, 14);
-        panelRegistro.add(lblExito);
-	}
-	private void limpiarFields() {
-		fieldLideres.setText("");
-		fieldArquitectos.setText("");
-		fieldTesters.setText("");
+	public static List<Persona> getMejorSolucion() {
+		return personas;
 	}
 }

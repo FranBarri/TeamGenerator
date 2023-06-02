@@ -11,6 +11,7 @@ import swing.PanelGradiente;
 
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
 import controladores.VentanaPrincipalControlador;
@@ -178,7 +179,6 @@ public class VentanaRegistro extends JFrame{
         );
         
         panelGradiente1.setLayout(gl_panelGradiente1);
-
         btnRegistrar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRegistrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -188,10 +188,14 @@ public class VentanaRegistro extends JFrame{
 				rol = (String) comboBox.getSelectedItem();
 				incompatibilidad = fieldIncomp.getText();
 				calificacion = (int) spinner.getValue();
-				Persona per = VentanaRegistroControlador.generarPersona(apellido, nombre, rol, incompatibilidad, calificacion);
-				personas = VentanaRegistroControlador.registrarPersona(per);
-				limpiarFields();
-				aniadirExito();
+				if (!apellido.isBlank() || !nombre.isBlank()) {
+					Persona per = VentanaRegistroControlador.generarPersona(apellido, nombre, rol, incompatibilidad, calificacion);
+					personas = VentanaRegistroControlador.registrarPersona(per);
+					limpiarFields();
+					aniadirExito();					
+				} else {					
+					JOptionPane.showMessageDialog(null, "El apellido o el nombre no pueden estar vacíos.");
+				}
 			}
 		});
         

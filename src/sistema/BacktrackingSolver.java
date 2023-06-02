@@ -18,7 +18,7 @@ public class BacktrackingSolver implements Runnable {
 
     @Override
     public void run()  {
-    	List<Persona> solucionActual = new ArrayList<>();
+    	List<Persona> solucionActual = new ArrayList<Persona>();
         backtracking(solucionActual, 0);
     }
     
@@ -54,10 +54,10 @@ public class BacktrackingSolver implements Runnable {
 
     private boolean esValidoAgregarPersona(List<Persona> solucion, Persona persona) {
         Map<String, Integer> rolesActuales = new HashMap<>();
-        rolesActuales.put("líder de proyecto", 0);
-        rolesActuales.put("arquitecto", 0);
-        rolesActuales.put("programador", 0);
-        rolesActuales.put("tester", 0);
+        rolesActuales.put("Lider del Proyecto", 0);
+        rolesActuales.put("Arquitecto", 0);
+        rolesActuales.put("Programador", 0);
+        rolesActuales.put("Tester", 0);
 
         for (Persona p : solucion) {
             rolesActuales.put(p.getRol(), rolesActuales.get(p.getRol()) + 1);
@@ -76,6 +76,9 @@ public class BacktrackingSolver implements Runnable {
 
         return true;
     }
-
+    
+    public List<Persona> getMejorSolucion(){
+    	return mejorSolucion;
+    }
 
 }

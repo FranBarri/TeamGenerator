@@ -2,6 +2,7 @@ package controladores;
 
 import java.util.List;
 
+import sistema.Incompatibilidad;
 import sistema.Persona;
 import sistema.Registrar;
 import visual.VentanaRegistro;
@@ -27,5 +28,8 @@ public class VentanaRegistroControlador {
 
 	public static List<Persona> getLista() {
 		return Registrar.getLista();
+	}
+	public static List<Incompatibilidad> getIncompatibilidades(Persona persona, String apellidoIncomp) {
+		return Registrar.generarIncompatibilidades(persona, apellidoIncomp);
 	}
 }

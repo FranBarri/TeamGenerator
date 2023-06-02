@@ -39,4 +39,8 @@ public class Persona {
 		this.rol = rol;
 	}
 	
+	public void setIncompatibilidad(String apellidoInc) {
+		this.incompatibilidad = apellidoInc;
+	}
+	
 }
