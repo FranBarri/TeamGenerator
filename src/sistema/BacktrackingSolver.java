@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BacktrackingSolver {
+public class BacktrackingSolver implements Runnable {
     private Equipo equipo;
     private List<Persona> mejorSolucion;
     private int mejorCalificacion;
@@ -16,10 +16,10 @@ public class BacktrackingSolver {
         this.mejorCalificacion = 0;
     }
 
-    public List<Persona> resolver() {
-        List<Persona> solucionActual = new ArrayList<>();
+    @Override
+    public void run()  {
+    	List<Persona> solucionActual = new ArrayList<>();
         backtracking(solucionActual, 0);
-        return mejorSolucion;
     }
     
     private void backtracking(List<Persona> solucionActual, int indice) {

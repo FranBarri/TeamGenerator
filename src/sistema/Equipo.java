@@ -1,5 +1,6 @@
 package sistema;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Equipo {
@@ -7,20 +8,27 @@ public class Equipo {
 	    private int arquitectos;
 	    private int programadores;
 	    private int testers;
-	    private List<Persona> personas;
-	    private List<Incompatibilidad> incompatibilidades;
+	    private ArrayList<Persona> personas;
+	    private ArrayList<Incompatibilidad> incompatibilidades;
 
 	    
 	    public Equipo() {
-	    	
+	    	 this.personas = new ArrayList<Persona>();
+	         this.incompatibilidades = new ArrayList<Incompatibilidad>();
 	    }
-	    public void cargarPersonas(List<Persona> personas) {
-	        this.personas = personas;
+	    
+	    public void agregarPersona(Persona persona, String apellidoIncompatible) {
+	        // Verificar si la persona es incompatible con alguien que ya fue ingresado
+	        for (Persona p : personas) {
+	            if (p.getApellido().equals(apellidoIncompatible)) {
+	                incompatibilidades.add(new Incompatibilidad(persona, p));
+	            }
+	        }
+
+	        // Agregar la persona a la lista de personas
+	        personas.add(persona);
 	    }
 
-	    public void cargarIncompatibilidades(List<Incompatibilidad> incompatibilidades) {
-	        this.incompatibilidades = incompatibilidades;
-	    }
 
 
 	    public void cargarRequerimientos(int lideresProyecto, int arquitectos, int programadores, int testers) {
@@ -72,13 +80,13 @@ public class Equipo {
 		public List<Persona> getPersonas() {
 			return personas;
 		}
-		public void setPersonas(List<Persona> personas) {
+		public void setPersonas(ArrayList<Persona> personas) {
 			this.personas = personas;
 		}
 		public List<Incompatibilidad> getIncompatibilidades() {
 			return incompatibilidades;
 		}
-		public void setIncompatibilidades(List<Incompatibilidad> incompatibilidades) {
+		public void setIncompatibilidades(ArrayList<Incompatibilidad> incompatibilidades) {
 			this.incompatibilidades = incompatibilidades;
 		}
 		
