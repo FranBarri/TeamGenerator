@@ -8,28 +8,14 @@ public class Equipo {
 	    private int arquitectos;
 	    private int programadores;
 	    private int testers;
-	    private ArrayList<Persona> personas;
-	    private ArrayList<Incompatibilidad> incompatibilidades;
+	    private List<Persona> personas;
+	    private List<Incompatibilidad> incompatibilidades;
 
 	    
-	    public Equipo() {
-	    	 this.personas = new ArrayList<Persona>();
-	         this.incompatibilidades = new ArrayList<Incompatibilidad>();
+	    public Equipo(List<Persona> personas, List<Incompatibilidad> incompatibilidades) {
+	    	 this.personas = personas;
+	         this.incompatibilidades = incompatibilidades;
 	    }
-	    
-	    public void agregarPersona(Persona persona, String apellidoIncompatible) {
-	        // Verificar si la persona es incompatible con alguien que ya fue ingresado
-	        for (Persona p : personas) {
-	            if (p.getApellido().equals(apellidoIncompatible)) {
-	                incompatibilidades.add(new Incompatibilidad(persona, p));
-	            }
-	        }
-
-	        // Agregar la persona a la lista de personas
-	        personas.add(persona);
-	    }
-
-
 
 	    public void cargarRequerimientos(int lideresProyecto, int arquitectos, int programadores, int testers) {
 	        this.lideresProyecto = lideresProyecto;
@@ -41,13 +27,13 @@ public class Equipo {
 	    public int getRolMax(String rol) {
 			//Devuelve el número máximo de personas permitidas para un rol específico.
 	        switch (rol) {
-	            case "líder de proyecto":
+	            case "Lider del Proyecto":
 	                return getLideresProyecto();
-	            case "arquitecto":
+	            case "Arquitecto":
 	                return getArquitectos();
-	            case "programador":
+	            case "Programador":
 	                return getProgramadores();
-	            case "tester":
+	            case "Tester":
 	                return getTesters();
 	            default:
 	                throw new IllegalArgumentException("Rol desconocido: " + rol);

@@ -1,5 +1,10 @@
 package controladores;
 
+import java.util.List;
+
+import sistema.Equipo;
+import sistema.Persona;
+import sistema.Proceso;
 import visual.VentanaEstadisticas;
 
 public class VentanaEstadisticasControlador {
@@ -12,5 +17,9 @@ public class VentanaEstadisticasControlador {
 	
 	public static void mostrar() {
 		ventanaEstadisticas.setVisible(true);
+	}
+	
+	public static List<Persona> getMejorEquipo(Equipo equipo){
+		return Proceso.generarSolucion(equipo);
 	}
 }

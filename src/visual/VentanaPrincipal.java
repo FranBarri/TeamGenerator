@@ -47,6 +47,7 @@ public class VentanaPrincipal extends JFrame {
 	}
 	private void initialize() {
 		personas = VentanaRegistroControlador.getLista();
+		mensaje = "";
 		setBounds(100, 100, 900, 600);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		try {
