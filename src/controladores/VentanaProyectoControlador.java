@@ -6,6 +6,7 @@ import sistema.Equipo;
 import sistema.Incompatibilidad;
 import sistema.Persona;
 import sistema.Proceso;
+import sistema.Registrar;
 import visual.VentanaProyecto;
 
 public class VentanaProyectoControlador {
@@ -27,5 +28,17 @@ public class VentanaProyectoControlador {
 	}
 	public static List<Persona> getMejorSolucion(Equipo equipoBase) {
 		return Proceso.generarSolucion(equipoBase);
+	}
+	public static int getCantLideres() {
+		return Registrar.getCantLideres();
+	}
+	public static int getCantArquitectos() {
+		return Registrar.getCantArquitectos();
+	}
+	public static int getCantTesters() {
+		return Registrar.getCantTesters();
+	}
+	public static int getCantProgramadores() {
+		return Registrar.getCantProgramadores();
 	}
 }

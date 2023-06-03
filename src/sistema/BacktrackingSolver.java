@@ -9,6 +9,7 @@ public class BacktrackingSolver implements Runnable {
     private Equipo equipo;
     private List<Persona> mejorSolucion;
     private int mejorCalificacion;
+    private static List<Integer> calificaciones;
 
     public BacktrackingSolver(Equipo equipo) {
         this.equipo = equipo;
@@ -19,6 +20,7 @@ public class BacktrackingSolver implements Runnable {
     @Override
     public void run()  {
     	List<Persona> solucionActual = new ArrayList<Persona>();
+    	calificaciones = new ArrayList<Integer>();
         backtracking(solucionActual, 0);
     }
     
@@ -27,7 +29,9 @@ public class BacktrackingSolver implements Runnable {
             int calificacionActual = calcularCalificacion(solucionActual);
             if (calificacionActual > mejorCalificacion) {
                 mejorCalificacion = calificacionActual;
+                calificaciones.add(mejorCalificacion);
                 mejorSolucion = new ArrayList<>(solucionActual);
+                
             }
             return;
         }
@@ -76,7 +80,9 @@ public class BacktrackingSolver implements Runnable {
 
         return true;
     }
-    
+    public static List<Integer> getCalificaciones() {
+        return calificaciones;
+    }
     public List<Persona> getMejorSolucion(){
     	return mejorSolucion;
     }

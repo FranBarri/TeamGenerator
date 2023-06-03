@@ -11,6 +11,7 @@ import swing.PanelGradiente;
 
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
 import controladores.VentanaEstadisticasControlador;
@@ -47,6 +48,10 @@ public class VentanaProyecto extends JFrame{
 	private Integer cantArquitectos;
 	private Integer cantTesters;
 	private Integer cantProgramadores;
+	private int maxLideres;
+	private int maxArquitectos;
+	private int maxTesters;
+	private int maxProgramadores;
 	private static List<Persona> personas;
 	private List<Incompatibilidad> incompatibilidades;
 
@@ -59,6 +64,10 @@ public class VentanaProyecto extends JFrame{
 		for (Persona p : personas) {			
 			incompatibilidades = VentanaRegistroControlador.getIncompatibilidades(p, p.getIncompatibilidad());
 		}
+		maxLideres = VentanaProyectoControlador.getCantLideres();
+		maxArquitectos = VentanaProyectoControlador.getCantArquitectos();
+		maxTesters = VentanaProyectoControlador.getCantTesters();
+		maxProgramadores = VentanaProyectoControlador.getCantProgramadores();
 		setBounds(100, 100, 900, 600);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		try {
@@ -177,11 +186,20 @@ public class VentanaProyecto extends JFrame{
 				cantArquitectos = Integer.parseInt(fieldArquitectos.getText());
 				cantTesters = Integer.parseInt(fieldTesters.getText());
 				cantProgramadores = Integer.parseInt(fieldProgramadores.getText());
-				Equipo equipoBase = VentanaProyectoControlador.generarEquipo(personas, incompatibilidades);
-				VentanaProyectoControlador.cargarRequerimientos(equipoBase, cantLideres, cantArquitectos, cantTesters, cantProgramadores);
-				personas = VentanaProyectoControlador.getMejorSolucion(equipoBase);
-				VentanaProyectoControlador.cerrar();
-				VentanaEstadisticasControlador.mostrar();
+				if (cantLideres <= 0 || cantArquitectos <= 0 || cantTesters <= 0 || cantProgramadores <= 0) {
+					JOptionPane.showMessageDialog(null, "Ingrese cantidades validas.");
+				} 
+				if (cantLideres > maxLideres || cantArquitectos > maxArquitectos 
+						|| cantTesters > maxTesters || cantProgramadores > maxProgramadores) {
+					JOptionPane.showMessageDialog(null, "No hay personas suficientes para ciertos roles.");
+				} else {					
+					Equipo equipoBase = VentanaProyectoControlador.generarEquipo(personas, incompatibilidades);
+					VentanaProyectoControlador.cargarRequerimientos(equipoBase, cantLideres, cantArquitectos, cantTesters, cantProgramadores);
+					personas = VentanaProyectoControlador.getMejorSolucion(equipoBase);
+					limpiarFields();
+					VentanaProyectoControlador.cerrar();
+					VentanaEstadisticasControlador.mostrar();
+				}
 			}
 		});
         
@@ -189,6 +207,7 @@ public class VentanaProyecto extends JFrame{
 		btnVolver.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			VentanaProyectoControlador.cerrar();
+			limpiarFields();
 			VentanaPrincipalControlador.mostrar();
 			VentanaPrincipalControlador.actualizarTabla(personas);
 		}
@@ -197,5 +216,12 @@ public class VentanaProyecto extends JFrame{
 	
 	public static List<Persona> getMejorSolucion() {
 		return personas;
+	}
+	
+	private void limpiarFields() {
+		fieldArquitectos.setText("");
+		fieldLideres.setText("");
+		fieldProgramadores.setText("");
+		fieldTesters.setText("");
 	}
 }
