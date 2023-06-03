@@ -42,4 +42,7 @@ public class VentanaPrincipalControlador {
 		Registrar.guardarJson(Personas);
 	}
 	
+	public static List<Persona> eliminarPersona(String apellido) {
+		return Registrar.eliminarPersona(apellido);
+	}
 }

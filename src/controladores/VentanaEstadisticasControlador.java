@@ -2,9 +2,7 @@ package controladores;
 
 import java.util.List;
 
-import sistema.Equipo;
-import sistema.Persona;
-import sistema.Proceso;
+import sistema.BacktrackingSolver;
 import visual.VentanaEstadisticas;
 
 public class VentanaEstadisticasControlador {
@@ -19,7 +17,7 @@ public class VentanaEstadisticasControlador {
 		ventanaEstadisticas.setVisible(true);
 	}
 	
-	public static List<Persona> getMejorEquipo(Equipo equipo){
-		return Proceso.generarSolucion(equipo);
+	public static List<Integer> getCalificaciones(){
+		return BacktrackingSolver.getCalificaciones();
 	}
 }

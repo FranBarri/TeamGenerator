@@ -151,6 +151,12 @@ public class VentanaRegistro extends JFrame{
         lblIncomp.setBounds(25, 263, 144, 14);
         panelRegistro.add(lblIncomp);
         
+        lblExito = new JLabel();
+        lblExito.setForeground(new Color(0, 128, 0));
+        lblExito.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        lblExito.setBounds(25, 360, 195, 14);
+        panelRegistro.add(lblExito);
+        
         JComboBox<String> comboBox = new JComboBox<>();
         comboBox.setModel(new DefaultComboBoxModel(new String[] {"Arquitecto", "Programador", "Tester", "Lider del Proyecto"}));
         comboBox.setBounds(24, 228, 181, 24);
@@ -182,7 +188,7 @@ public class VentanaRegistro extends JFrame{
         btnRegistrar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnRegistrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-//        		panelRegistro.remove(lblExito);
+				panelRegistro.remove(lblExito);
 				apellido = fieldApellido.getText();
 				nombre = fieldNombre.getText();
 				rol = (String) comboBox.getSelectedItem();
@@ -203,6 +209,7 @@ public class VentanaRegistro extends JFrame{
 		btnVolver.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			VentanaRegistroControlador.cerrar();
+			limpiarFields();
 			VentanaPrincipalControlador.mostrar();
 			VentanaPrincipalControlador.actualizarTabla(personas);
 		}
@@ -210,11 +217,8 @@ public class VentanaRegistro extends JFrame{
 	}
 	
 	private void aniadirExito() {
-        lblExito = new JLabel("\u00A1Persona registrada con éxito!");
-        lblExito.setForeground(new Color(0, 128, 0));
-        lblExito.setFont(new Font("Tahoma", Font.PLAIN, 11));
-        lblExito.setBounds(25, 360, 195, 14);
-        panelRegistro.add(lblExito);
+		lblExito.setText("\u00A1Persona registrada con éxito!");
+		panelRegistro.add(lblExito);
 	}
 	private void limpiarFields() {
 		fieldApellido.setText("");

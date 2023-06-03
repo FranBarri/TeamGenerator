@@ -18,6 +18,10 @@ public class Registrar {
     private static ListaPersonas listaPersonas = gsonGenerator.getListaDesdeJson();
     private static List<Persona> listaPers = listaPersonas.getLista();
     private static List<Incompatibilidad> listaIncomp = new ArrayList<Incompatibilidad>();
+    private static int cantLideres = 0;
+    private static int cantArquitectos = 0;
+    private static int cantTesters = 0;
+    private static int cantProgramadores = 0;
     
 	public static Persona generarPersona(String apellido, String nombre, String rol, String incompatibilidad, int calificacion) {
 		Persona persona = new Persona(apellido, nombre, rol, incompatibilidad, calificacion);
@@ -33,7 +37,17 @@ public class Registrar {
 				}
 				if (persona.getIncompatibilidad().equals(per.getApellido())) {
 					per.setIncompatibilidad(persona.getApellido());
-				}			
+				}
+				switch (persona.getRol()) {
+				case "Lider del Proyecto":
+					cantLideres++;
+				case "Arquitecto":
+					cantArquitectos++;
+				case "Programador":
+					cantProgramadores++;
+				case "Tester":
+					cantTesters++;
+				}
 			}
 		}
 		return listaPers;
@@ -62,12 +76,16 @@ public class Registrar {
 	public static List<Persona> eliminarPersona(String apellido) {
 	    boolean encontrada = false;
 	    List<Persona> ret = new ArrayList<>();
-	    for (Persona person : listaPers) {
-	        if (person.getApellido().equalsIgnoreCase(apellido.trim())) {
-	            encontrada = true;
-	        } else {
-	            ret.add(person);
-	        }
+	    if (apellido != null) {	    
+	    	for (Persona person : listaPers) {
+	    		if (person.getApellido().equalsIgnoreCase(apellido.trim())) {
+	    			encontrada = true;
+	    		} else {
+	    			ret.add(person);
+	    		}
+	    	}
+	    } else {
+	    	return listaPers;
 	    }
 	    listaPers = ret;
 	    if (!encontrada && !listaPers.isEmpty()) {
@@ -109,8 +127,19 @@ public class Registrar {
 	public static List<Persona> getLista() {
 		return listaPers;
 	}
-
 	public static List<Incompatibilidad> getIncompatibilidades() {
 		return listaIncomp;
+	}
+	public static int getCantLideres() {
+		return cantLideres;
+	}
+	public static int getCantArquitectos() {
+		return cantArquitectos;
+	}
+	public static int getCantTesters() {
+		return cantTesters;
+	}
+	public static int getCantProgramadores() {
+		return cantProgramadores;
 	}
 }
