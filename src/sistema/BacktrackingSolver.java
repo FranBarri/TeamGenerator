@@ -86,5 +86,10 @@ public class BacktrackingSolver implements Runnable {
     public List<Persona> getMejorSolucion(){
     	return mejorSolucion;
     }
+    
+    public int getMejorCalificacion()
+    {
+    	return mejorCalificacion;
+    }
 
 }

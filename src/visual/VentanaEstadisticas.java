@@ -24,7 +24,6 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.xy.DefaultXYDataset;
 import controladores.VentanaEstadisticasControlador;
 import controladores.VentanaPrincipalControlador;
-import sistema.BacktrackingSolver;
 import sistema.Persona;
 
 import javax.swing.GroupLayout.Alignment;
