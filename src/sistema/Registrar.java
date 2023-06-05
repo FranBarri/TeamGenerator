@@ -38,23 +38,13 @@ public class Registrar {
 				if (persona.getIncompatibilidad().equals(per.getApellido())) {
 					per.setIncompatibilidad(persona.getApellido());
 				}
-				switch (persona.getRol()) {
-				case "Lider del Proyecto":
-					cantLideres++;
-				case "Arquitecto":
-					cantArquitectos++;
-				case "Programador":
-					cantProgramadores++;
-				case "Tester":
-					cantTesters++;
-				}
 			}
 		}
 		return listaPers;
 	}
 	
 	public static List<Incompatibilidad> generarIncompatibilidades(Persona persona, String apellidoIncompatible) {
-	    for (Persona p : listaPers) {
+		for (Persona p : listaPers) {
 	        if (p.getApellido().equals(apellidoIncompatible)) {
 	        	if(!existeIncompatibilidad(persona, p)) {
 	        		listaIncomp.add(new Incompatibilidad(persona, p));	        		
@@ -126,20 +116,5 @@ public class Registrar {
 	}
 	public static List<Persona> getLista() {
 		return listaPers;
-	}
-	public static List<Incompatibilidad> getIncompatibilidades() {
-		return listaIncomp;
-	}
-	public static int getCantLideres() {
-		return cantLideres;
-	}
-	public static int getCantArquitectos() {
-		return cantArquitectos;
-	}
-	public static int getCantTesters() {
-		return cantTesters;
-	}
-	public static int getCantProgramadores() {
-		return cantProgramadores;
 	}
 }

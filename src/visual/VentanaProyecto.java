@@ -48,10 +48,6 @@ public class VentanaProyecto extends JFrame{
 	private Integer cantArquitectos;
 	private Integer cantTesters;
 	private Integer cantProgramadores;
-	private int maxLideres;
-	private int maxArquitectos;
-	private int maxTesters;
-	private int maxProgramadores;
 	private static List<Persona> personas;
 	private List<Incompatibilidad> incompatibilidades;
 
@@ -64,10 +60,6 @@ public class VentanaProyecto extends JFrame{
 		for (Persona p : personas) {			
 			incompatibilidades = VentanaRegistroControlador.getIncompatibilidades(p, p.getIncompatibilidad());
 		}
-		maxLideres = VentanaProyectoControlador.getCantLideres();
-		maxArquitectos = VentanaProyectoControlador.getCantArquitectos();
-		maxTesters = VentanaProyectoControlador.getCantTesters();
-		maxProgramadores = VentanaProyectoControlador.getCantProgramadores();
 		setBounds(100, 100, 900, 600);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		try {
@@ -182,23 +174,23 @@ public class VentanaProyecto extends JFrame{
         btnGenerar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnGenerar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cantLideres = Integer.parseInt(fieldLideres.getText());
-				cantArquitectos = Integer.parseInt(fieldArquitectos.getText());
-				cantTesters = Integer.parseInt(fieldTesters.getText());
-				cantProgramadores = Integer.parseInt(fieldProgramadores.getText());
-				if (cantLideres <= 0 || cantArquitectos <= 0 || cantTesters <= 0 || cantProgramadores <= 0) {
-					JOptionPane.showMessageDialog(null, "Ingrese cantidades validas.");
-				} 
-				if (cantLideres > maxLideres || cantArquitectos > maxArquitectos 
-						|| cantTesters > maxTesters || cantProgramadores > maxProgramadores) {
-					JOptionPane.showMessageDialog(null, "No hay personas suficientes para ciertos roles.");
-				} else {					
-					Equipo equipoBase = VentanaProyectoControlador.generarEquipo(personas, incompatibilidades);
-					VentanaProyectoControlador.cargarRequerimientos(equipoBase, cantLideres, cantArquitectos, cantTesters, cantProgramadores);
-					personas = VentanaProyectoControlador.getMejorSolucion(equipoBase);
-					limpiarFields();
-					VentanaProyectoControlador.cerrar();
-					VentanaEstadisticasControlador.mostrar();
+				try {
+					cantLideres = Integer.parseInt(fieldLideres.getText());
+					cantArquitectos = Integer.parseInt(fieldArquitectos.getText());
+					cantTesters = Integer.parseInt(fieldTesters.getText());
+					cantProgramadores = Integer.parseInt(fieldProgramadores.getText());
+					if (cantLideres <= 0 || cantArquitectos <= 0 || cantTesters <= 0 || cantProgramadores <= 0) {
+						JOptionPane.showMessageDialog(null, "Ingrese cantidades validas.");
+					} else {					
+						Equipo equipoBase = VentanaProyectoControlador.generarEquipo(personas, incompatibilidades);
+						VentanaProyectoControlador.cargarRequerimientos(equipoBase, cantLideres, cantArquitectos, cantTesters, cantProgramadores);
+						personas = VentanaProyectoControlador.getMejorSolucion(equipoBase);
+						limpiarFields();
+						VentanaProyectoControlador.cerrar();
+						VentanaEstadisticasControlador.mostrar();
+					}
+				} catch (NumberFormatException a) {
+					JOptionPane.showMessageDialog(null, "Solo puede ingresar numeros.");
 				}
 			}
 		});

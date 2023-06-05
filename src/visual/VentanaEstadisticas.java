@@ -107,10 +107,10 @@ public class VentanaEstadisticas extends JFrame{
         lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 60));
         lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
         
-        JButton btnPantallaPrincipal = new JButton("Pantalla Principal");
-        btnPantallaPrincipal.setForeground(Color.BLACK);
-        btnPantallaPrincipal.setFont(new Font("Tahoma", Font.PLAIN, 12));
-        btnPantallaPrincipal.setBackground(Color.LIGHT_GRAY);
+//        JButton btnPantallaPrincipal = new JButton("Pantalla Principal");
+//        btnPantallaPrincipal.setForeground(Color.BLACK);
+//        btnPantallaPrincipal.setFont(new Font("Tahoma", Font.PLAIN, 12));
+//        btnPantallaPrincipal.setBackground(Color.LIGHT_GRAY);
         
         GroupLayout gl_panelGradiente1 = new GroupLayout(panelGradiente1);
         gl_panelGradiente1.setHorizontalGroup(
@@ -121,42 +121,33 @@ public class VentanaEstadisticas extends JFrame{
         				.addGroup(gl_panelGradiente1.createSequentialGroup()
         					.addGap(25)
         					.addComponent(panelRedondo1, GroupLayout.PREFERRED_SIZE, 470, GroupLayout.PREFERRED_SIZE))
-        				.addGroup(gl_panelGradiente1.createSequentialGroup()
-        					.addComponent(panelRedondo2, GroupLayout.PREFERRED_SIZE, 524, GroupLayout.PREFERRED_SIZE)
-        					.addGap(18)
-        					.addComponent(btnPantallaPrincipal, GroupLayout.PREFERRED_SIZE, 152, GroupLayout.PREFERRED_SIZE)))
-        			.addGap(18))
+        				.addComponent(panelRedondo2, GroupLayout.PREFERRED_SIZE, 524, GroupLayout.PREFERRED_SIZE))
+        			.addContainerGap(417, Short.MAX_VALUE))
         		.addComponent(lblTitulo, GroupLayout.DEFAULT_SIZE, 884, Short.MAX_VALUE)
         );
         gl_panelGradiente1.setVerticalGroup(
         	gl_panelGradiente1.createParallelGroup(Alignment.TRAILING)
         		.addGroup(gl_panelGradiente1.createSequentialGroup()
-        			.addComponent(lblTitulo, GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
-        			.addGroup(gl_panelGradiente1.createParallelGroup(Alignment.LEADING, false)
-        				.addGroup(gl_panelGradiente1.createSequentialGroup()
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addComponent(panelRedondo1, GroupLayout.PREFERRED_SIZE, 149, GroupLayout.PREFERRED_SIZE)
-        					.addGap(18)
-        					.addComponent(panelRedondo2, GroupLayout.PREFERRED_SIZE, 269, GroupLayout.PREFERRED_SIZE)
-        					.addContainerGap())
-        				.addGroup(Alignment.TRAILING, gl_panelGradiente1.createSequentialGroup()
-        					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        					.addComponent(btnPantallaPrincipal, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
-        					.addGap(20))))
+        			.addComponent(lblTitulo, GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(panelRedondo1, GroupLayout.PREFERRED_SIZE, 149, GroupLayout.PREFERRED_SIZE)
+        			.addGap(18)
+        			.addComponent(panelRedondo2, GroupLayout.PREFERRED_SIZE, 269, GroupLayout.PREFERRED_SIZE)
+        			.addContainerGap())
         );
         
         panelGradiente1.setLayout(gl_panelGradiente1);
         
-        btnPantallaPrincipal.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnPantallaPrincipal.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-			getContentPane().invalidate();
-			getContentPane().validate();
-			getContentPane().repaint();
-			VentanaEstadisticasControlador.cerrar();
-			VentanaPrincipalControlador.mostrar();
-		}
-	});
+//        btnPantallaPrincipal.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+//		btnPantallaPrincipal.addActionListener(new ActionListener() {
+//		public void actionPerformed(ActionEvent e) {
+//			getContentPane().invalidate();
+//			getContentPane().validate();
+//			getContentPane().repaint();
+//			VentanaEstadisticasControlador.cerrar();
+//			VentanaPrincipalControlador.mostrar();
+//		}
+//	});
 	
         dataset = new DefaultXYDataset();
         JFreeChart chart = ChartFactory.createXYLineChart(

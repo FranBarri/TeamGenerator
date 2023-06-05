@@ -55,7 +55,7 @@ public class RegistrarTest
 	@Test
 	public void eliminarPersonaTest()
 	{
-		listaPersonas = Registrar.eliminarPersona(p3.getNombre());
+		listaPersonas = Registrar.eliminarPersona(p3.getApellido());
 		assertFalse(listaPersonas.contains(p3));
 	}
 
