@@ -18,10 +18,6 @@ public class Registrar {
     private static ListaPersonas listaPersonas = gsonGenerator.getListaDesdeJson();
     private static List<Persona> listaPers = listaPersonas.getLista();
     private static List<Incompatibilidad> listaIncomp = new ArrayList<Incompatibilidad>();
-    private static int cantLideres = 0;
-    private static int cantArquitectos = 0;
-    private static int cantTesters = 0;
-    private static int cantProgramadores = 0;
     
 	public static Persona generarPersona(String apellido, String nombre, String rol, String incompatibilidad, int calificacion) {
 		Persona persona = new Persona(apellido, nombre, rol, incompatibilidad, calificacion);
